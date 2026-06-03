@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "http://phuongnguyen1476-001-site1.site4future.com/api/:path*"
+      "destination": "https://phuongnguyen1476-001-site1.site4future.com/api/:path*"
     },
     {
       "source": "/((?!api/).*)",
