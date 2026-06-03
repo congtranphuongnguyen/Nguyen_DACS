@@ -1,26 +1,10 @@
 const getApiBaseUrl = () => {
-  // If running on a Vercel deployment, route API requests through Vercel's HTTPS rewrites/proxy
-  // to prevent Mixed Content (HTTP on HTTPS) and ERR_CONNECTION_RESET (no HTTPS/SSL support on site4future)
-  if (typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app')) {
-    console.warn('[API] Vercel deployment detected. Routing requests via HTTPS relative proxy to prevent Mixed Content/Connection Reset.');
-    return '';
-  }
-
   const url = import.meta.env.VITE_API_URL;
   if (!url) {
     console.warn("VITE_API_URL is undefined. Defaulting to http://localhost:5194");
     return "http://localhost:5194";
   }
-
   let cleanUrl = url.endsWith('/') ? url.slice(0, -1) : url;
-
-  if (typeof window !== 'undefined' &&
-      window.location.protocol === 'https:' &&
-      cleanUrl.startsWith('http:')) {
-    cleanUrl = cleanUrl.replace('http:', 'https:');
-    console.warn('[API] Auto-upgraded to HTTPS:', cleanUrl);
-  }
-
   return cleanUrl;
 };
 
