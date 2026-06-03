@@ -31,7 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Commented out to prevent HTTPS redirect loops behind reverse proxies (Vercel)
 app.UseCors("AllowVercel");
 app.UseAuthorization();
 app.MapControllers();

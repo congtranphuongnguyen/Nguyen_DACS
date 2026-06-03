@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("AllowVercel");
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection(); // Commented out to prevent HTTPS redirect loops behind reverse proxies (Vercel)
 app.UseAuthorization();
 app.MapControllers();
 
