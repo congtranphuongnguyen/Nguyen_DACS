@@ -122,7 +122,7 @@ function AppContent() {
         />
       )}
 
-      <main className={`${isHandcraftedPage ? 'pt-0' : 'pt-32'} pb-24 flex-grow w-full`}>
+      <main className={`${isHandcraftedPage ? 'pt-0' : 'pt-24 md:pt-32'} pb-24 flex-grow w-full`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={

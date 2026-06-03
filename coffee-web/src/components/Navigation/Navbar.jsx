@@ -40,11 +40,13 @@ const Navbar = ({ cartCount, onCartToggle, searchQuery, onSearchChange }) => {
   }, []);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 py-6 transition-all duration-300">
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex justify-between items-center gap-8">
+    <nav className="fixed top-0 w-full z-50 bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 py-4 md:py-6 transition-all duration-300">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex justify-between items-center gap-4 md:gap-8">
         {/* Logo */}
-        <Link to="/" className="text-xl md:text-2xl font-serif font-bold text-primary flex-shrink-0 hover:opacity-80 transition-opacity">
-          The Artisanal Digital Roastery
+        <Link to="/" className="font-serif font-bold text-primary hover:opacity-80 transition-opacity whitespace-nowrap flex-shrink-0">
+          <span className="inline sm:hidden text-lg">Alchemist</span>
+          <span className="hidden sm:inline lg:hidden text-xl">Alchemist Roastery</span>
+          <span className="hidden lg:inline text-xl xl:text-2xl">The Artisanal Digital Roastery</span>
         </Link>
 
 
@@ -120,23 +122,23 @@ const Navbar = ({ cartCount, onCartToggle, searchQuery, onSearchChange }) => {
         </div>
 
         {/* Links & Actions */}
-        <div className="flex items-center gap-8 font-medium text-secondary">
-          <div className="hidden md:flex items-center gap-8 font-bold text-xs uppercase tracking-widest">
+        <div className="flex items-center gap-4 lg:gap-8 font-medium text-secondary flex-shrink">
+          <div className="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 font-bold text-[10px] lg:text-xs uppercase tracking-widest flex-shrink">
             <Link
               to="/"
-              className={`transition-colors h-8 flex items-center ${isActive('/') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+              className={`transition-colors h-8 flex items-center whitespace-nowrap ${isActive('/') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
             >
               Home
             </Link>
             <Link
               to="/shop"
-              className={`transition-colors h-8 flex items-center ${isActive('/shop') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+              className={`transition-colors h-8 flex items-center whitespace-nowrap ${isActive('/shop') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
             >
               Shop
             </Link>
             <Link
               to="/menu"
-              className={`transition-colors h-8 flex items-center ${isActive('/menu') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+              className={`transition-colors h-8 flex items-center whitespace-nowrap ${isActive('/menu') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
             >
               Menu
             </Link>
@@ -144,7 +146,7 @@ const Navbar = ({ cartCount, onCartToggle, searchQuery, onSearchChange }) => {
             {isAdmin ? (
               <Link
                 to="/admin"
-                className={`transition-colors h-8 flex items-center ${isActive('/admin') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+                className={`transition-colors h-8 flex items-center whitespace-nowrap ${isActive('/admin') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
               >
                 Admin
               </Link>
@@ -152,14 +154,14 @@ const Navbar = ({ cartCount, onCartToggle, searchQuery, onSearchChange }) => {
               <>
                 <Link
                   to="/brewing"
-                  className={`transition-colors h-8 flex items-center ${isActive('/brewing') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+                  className={`transition-colors h-8 flex items-center whitespace-nowrap ${isActive('/brewing') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
                 >
                   Brewing
                 </Link>
                 {isLoggedIn && (
                   <Link
                     to="/my-orders"
-                    className={`transition-colors h-8 flex items-center ${isActive('/my-orders') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
+                    className={`transition-colors h-8 flex items-center whitespace-nowrap ${isActive('/my-orders') ? 'text-primary border-b-2 border-primary' : 'hover:text-primary'}`}
                   >
                     My Orders
                   </Link>
@@ -168,7 +170,7 @@ const Navbar = ({ cartCount, onCartToggle, searchQuery, onSearchChange }) => {
             )}
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 lg:gap-6 flex-shrink-0">
             <Link to={isLoggedIn ? "/profile" : "/login"} className="hover:opacity-80 transition-opacity p-2 hover:bg-surface-container rounded-full flex items-center">
               <span className={`material-symbols-outlined ${location.pathname === '/profile' ? 'text-primary' : 'text-secondary'}`}>
                 person
@@ -176,7 +178,7 @@ const Navbar = ({ cartCount, onCartToggle, searchQuery, onSearchChange }) => {
             </Link>
 
             {isLoggedIn && (
-              <span className="hidden md:block text-[10px] font-bold uppercase tracking-widest text-secondary">
+              <span className="hidden lg:block text-[10px] font-bold uppercase tracking-widest text-secondary whitespace-nowrap">
                 {currentUser?.fullName?.split(' ')[0] || currentUser?.email.split('@')[0]}
               </span>
             )}
@@ -184,7 +186,7 @@ const Navbar = ({ cartCount, onCartToggle, searchQuery, onSearchChange }) => {
             {/* Cart Icon */}
             <button
               onClick={() => onCartToggle()}
-              className="relative cursor-pointer group p-2 hover:bg-surface-container rounded-full transition-colors flex items-center"
+              className="relative cursor-pointer group p-2 hover:bg-surface-container rounded-full transition-colors flex items-center flex-shrink-0"
             >
               <span className="material-symbols-outlined text-secondary group-hover:text-primary">
                 shopping_bag

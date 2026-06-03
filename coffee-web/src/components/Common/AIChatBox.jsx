@@ -135,7 +135,7 @@ const AIChatBox = () => {
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-[100] font-sans text-primary">
+    <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] font-sans text-primary">
       {showGreetingBubble && !isOpen && (
         <div className="absolute bottom-20 right-0 w-64 p-4 bg-white rounded-2xl shadow-2xl border border-primary/10 animate-in fade-in slide-in-from-bottom-4 duration-500 z-50">
           <p className="text-primary text-sm font-medium leading-relaxed italic">
@@ -155,7 +155,7 @@ const AIChatBox = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-20 right-0 w-[420px] max-w-[90vw] h-[580px] max-h-[82vh] bg-surface-container rounded-[2.5rem] shadow-[-20px_20px_60px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden animate-in fade-in zoom-in slide-in-from-bottom-10 duration-500 border border-outline-variant/10">
+        <div className="absolute bottom-20 right-0 w-[420px] max-w-[calc(100vw-32px)] md:max-w-[90vw] h-[500px] md:h-[580px] max-h-[75vh] md:max-h-[82vh] bg-surface-container rounded-[2.5rem] shadow-[-20px_20px_60px_rgba(0,0,0,0.15)] flex flex-col overflow-hidden animate-in fade-in zoom-in slide-in-from-bottom-10 duration-500 border border-outline-variant/10">
           <div className="bg-primary p-7 text-on-primary flex justify-between items-center relative overflow-hidden">
              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
              <div className="relative z-10 flex items-center gap-4">

@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div className="animate-in fade-in duration-1000 w-full overflow-x-hidden bg-surface text-on-surface">
       {/* Hero Section - Full Width Background */}
-      <section className="relative h-[60vh] md:h-[70vh] max-h-[600px] flex items-center overflow-hidden mb-24">
+      <section className="relative min-h-[75vh] md:h-[70vh] md:max-h-[600px] flex items-center overflow-hidden mb-24 py-16 md:py-0">
         <div className="absolute inset-0 z-0">
           <img 
             alt="Artisanal coffee brewing" 
@@ -23,23 +23,23 @@ const Home = () => {
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 md:px-12">
           <div className="max-w-3xl">
             <span className="text-surface font-label uppercase tracking-[0.4em] text-[10px] mb-4 block">Est. 2024 — Small Batch Roastery</span>
-            <h1 className="text-surface font-headline text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
+            <h1 className="text-surface font-headline text-4xl sm:text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
               The Ritual of the <span className="italic font-serif font-light">Perfect</span> Pour
             </h1>
-            <p className="text-surface/80 text-base md:text-lg font-light mb-10 max-w-lg leading-relaxed">
+            <p className="text-surface/80 text-sm md:text-lg font-light mb-8 md:mb-10 max-w-lg leading-relaxed">
               Sourced from high-altitude estates, roasted with clinical precision, and delivered for your morning sanctuary. Explore our curated single-origin series.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
               <Link 
                 to="/shop" 
-                className="bg-surface text-primary px-10 py-4 rounded-lg font-label font-bold text-xs tracking-widest hover:bg-white transition-all flex items-center justify-center group shadow-lg"
+                className="bg-surface text-primary px-8 sm:px-10 py-3.5 sm:py-4 rounded-lg font-label font-bold text-[10px] sm:text-xs tracking-widest hover:bg-white transition-all flex items-center justify-center group shadow-lg"
               >
                 EXPLORE THE BEANS
                 <span className="material-symbols-outlined ml-3 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </Link>
               <Link 
                 to="/sommelier" 
-                className="bg-primary/20 backdrop-blur-md border border-surface/30 text-surface px-10 py-4 rounded-lg font-label font-bold text-xs tracking-widest hover:bg-primary transition-all flex items-center justify-center group"
+                className="bg-primary/20 backdrop-blur-md border border-surface/30 text-surface px-8 sm:px-10 py-3.5 sm:py-4 rounded-lg font-label font-bold text-[10px] sm:text-xs tracking-widest hover:bg-primary transition-all flex items-center justify-center group"
               >
                 FIND YOUR RITUAL (AI)
                 <span className="material-symbols-outlined ml-3 text-sm animate-pulse">magic_button</span>

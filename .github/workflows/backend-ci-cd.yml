@@ -1,0 +1,91 @@
+name: Backend CI/CD Pipeline to AWS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ProjectCoffee.Backend/**'
+      - '.github/workflows/backend-ci-cd.yml'
+
+env:
+  AWS_REGION: ap-southeast-1 # Thay đổi thành region của bạn
+  ECR_REPOSITORY: project-coffee-backend
+  ECS_SERVICE: project-coffee-backend-service
+  ECS_CLUSTER: project-coffee-cluster
+  ECS_TASK_DEFINITION: .github/workflows/task-definition.json # Đường dẫn file Task Definition
+  CONTAINER_NAME: backend-container
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build & Test Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore Dependencies
+        run: dotnet restore ProjectCoffee.Backend/ProjectCoffee.Backend.csproj
+
+      - name: Build Code
+        run: dotnet build ProjectCoffee.Backend/ProjectCoffee.Backend.csproj --no-restore -c Release
+
+      # Thêm bước chạy Test nếu có dự án Unit Test
+      # - name: Run Tests
+      #   run: dotnet test ProjectCoffee.Backend.Tests/ProjectCoffee.Backend.Tests.csproj --no-build -c Release
+
+  deploy-to-aws:
+    name: Deploy Container to AWS ECS
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, Tag & Push Image to AWS ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f ProjectCoffee.Backend/Dockerfile ProjectCoffee.Backend/
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
