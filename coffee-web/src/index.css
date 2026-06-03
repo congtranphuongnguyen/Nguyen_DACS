@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  /* Light Theme - "Cafe Sáng" */
+  --color-surface: #FAF9F6; /* Milk foam / Cream */
+  --color-background: #FAF9F6;
+  --color-on-surface: #212121; /* Charcoal / Dark Brown */
+  --color-on-background: #212121;
+  
+  --color-primary: #4E342E; /* Dark Coffee Brown */
+  --color-on-primary: #FAF9F6;
+  
+  --color-secondary: #A1887F; /* Earthy Muted Brown */
+  --color-on-secondary: #FFFFFF;
+  
+  --color-tertiary: #D7CCC8; /* Light Beige / Latte */
+  --color-on-tertiary: #4E342E;
+  
+  --color-surface-container: #FFFFFF; /* Pure White for Cards */
+  --color-surface-container-low: #F5F5F3;
+  --color-surface-container-high: #EBEBE9;
+  
+  --color-outline: #D4C3BF;
+  --color-outline-variant: #E5DEDC;
+  
+  --color-error: #BA1A1A;
+  --color-on-error: #FFFFFF;
+
+  --radius-default: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  --font-headline: "Noto Serif", "Inter", serif;
+  --font-sans: "Inter", "Manrope", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", "Manrope", system-ui, -apple-system, sans-serif;
+  --font-label: "Inter", "Manrope", system-ui, -apple-system, sans-serif;
+
+  /* Dark Mode - "Espresso Dark" */
+  --color-dark-surface: #1B1614; /* Deep Roasted Bean */
+  --color-dark-on-surface: #FAF9F6;
+  --color-dark-container: #2A2421;
+}
+
+.dark {
+  --color-surface: var(--color-dark-surface);
+  --color-on-surface: var(--color-dark-on-surface);
+  --color-background: var(--color-dark-surface);
+  --color-surface-container: var(--color-dark-container);
+  --color-primary: #FAF9F6; /* Cream/White for text on dark */
+  --color-on-primary: #1B1614;
+  --color-secondary: #D7CCC8;
+  --color-on-secondary: #1B1614;
+  --color-outline-variant: rgba(255, 255, 255, 0.05);
+  --color-on-surface-variant: #A89F9D;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-on-surface selection:bg-secondary/30 selection:text-primary font-body transition-colors duration-300;
+  }
+  h1, h2, h3, .font-noto-serif {
+    @apply font-headline text-primary;
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.custom-gradient {
+  background: linear-gradient(135deg, #4E342E 0%, #745853 100%);
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInFromBottom {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-in {
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+.fade-in { animation-name: fadeIn; }
+.slide-in-from-bottom-4 { animation-name: slideInFromBottom; }
+.slide-in-from-top-2 { animation-name: slideInFromTop; }
+.zoom-in { animation-name: zoomIn; }
+
+.fill-mode-both {
+  animation-fill-mode: both;
+}
