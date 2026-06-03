@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "http://phuongnguyen1476-001-site1.site4future.com/api/:path*"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }
