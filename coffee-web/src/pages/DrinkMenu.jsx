@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navigation/Navbar';
 import { useCart } from '../context/CartContext';
 import { useUI } from '../context/UIContext';
-import { api } from '../api';
+import { api } from '../services';
 import heroImage from '../assets/hero.png';
 import grinderImage from '../assets/precision_hand_grinder.png';
 import MemberCard from '../components/User/MemberCard';

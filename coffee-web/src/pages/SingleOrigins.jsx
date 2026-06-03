@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
-import { api } from '../api';
+import { api } from '../services';
 
 const SingleOrigins = () => {
   const { addToCart } = useCart();

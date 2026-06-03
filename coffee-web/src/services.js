@@ -1,23 +1,32 @@
-const API_BASE_URL = 'http://localhost:5194/api'; // Standard ASP.NET Core port
+const getApiBaseUrl = () => {
+  const url = import.meta.env.VITE_API_URL;
+  if (!url) {
+    console.warn("VITE_API_URL is undefined. Defaulting to http://localhost:5194");
+    return "http://localhost:5194";
+  }
+  return url.endsWith('/') ? url.slice(0, -1) : url;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 export const api = {
   // Products
   getProducts: async (category) => {
-    const url = new URL(`${API_BASE_URL}/products`);
+    const url = new URL(`${API_BASE_URL}/api/products`);
     if (category && category !== 'All') url.searchParams.append('category', category);
     const response = await fetch(url);
     return response.json();
   },
   getSecretProducts: async () => {
-    const response = await fetch(`${API_BASE_URL}/products/secret`);
+    const response = await fetch(`${API_BASE_URL}/api/products/secret`);
     return response.json();
   },
   getRoastDate: async (id) => {
-    const response = await fetch(`${API_BASE_URL}/products/roast-date/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/products/roast-date/${id}`);
     return response.json();
   },
   updateProduct: async (id, productData) => {
-    const response = await fetch(`${API_BASE_URL}/products/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(productData),
@@ -34,11 +43,11 @@ export const api = {
 
   // Orders
   getOrders: async (email) => {
-    const response = await fetch(`${API_BASE_URL}/orders?email=${email || ''}`);
+    const response = await fetch(`${API_BASE_URL}/api/orders?email=${email || ''}`);
     return response.json();
   },
   createOrder: async (orderData) => {
-    const response = await fetch(`${API_BASE_URL}/orders`, {
+    const response = await fetch(`${API_BASE_URL}/api/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderData),
@@ -48,11 +57,11 @@ export const api = {
 
   // Flavor Journal
   getJournal: async (email) => {
-    const response = await fetch(`${API_BASE_URL}/journal?email=${email || ''}`);
+    const response = await fetch(`${API_BASE_URL}/api/journal?email=${email || ''}`);
     return response.json();
   },
   saveJournalEntry: async (entry) => {
-    const response = await fetch(`${API_BASE_URL}/journal`, {
+    const response = await fetch(`${API_BASE_URL}/api/journal`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(entry),
@@ -60,14 +69,14 @@ export const api = {
     return response.json();
   },
   getPreviousNote: async (productId, email) => {
-    const response = await fetch(`${API_BASE_URL}/journal/previous/${productId}?email=${email}`);
+    const response = await fetch(`${API_BASE_URL}/api/journal/previous/${productId}?email=${email}`);
     if (response.status === 404) return null;
     return response.json();
   },
 
   // Admin Stats
   getToppingStats: async () => {
-    const response = await fetch(`${API_BASE_URL}/orders/stats/toppings`);
+    const response = await fetch(`${API_BASE_URL}/api/orders/stats/toppings`);
     return response.json();
   }
 };

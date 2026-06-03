@@ -15,8 +15,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // CORS for React
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowReact",
-        policy => policy.AllowAnyOrigin()
+    options.AddPolicy("AllowVercel",
+        policy => policy.WithOrigins("https://nguyen-dacs.vercel.app")
                         .AllowAnyMethod()
                         .AllowAnyHeader());
 });
@@ -30,7 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("AllowReact");
+app.UseCors("AllowVercel");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

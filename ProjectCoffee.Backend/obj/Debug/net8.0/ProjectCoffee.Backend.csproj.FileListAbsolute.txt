@@ -136,3 +136,5 @@ C:\Users\Acer\OneDrive\Tài liệu\Project-Coffee\ProjectCoffee.Backend\obj\De
 C:\Users\Acer\OneDrive\Tài liệu\Project-Coffee\ProjectCoffee.Backend\obj\Debug\net8.0\ProjectCoffee.Backend.pdb
 C:\Users\Acer\OneDrive\Tài liệu\Project-Coffee\ProjectCoffee.Backend\obj\Debug\net8.0\ProjectCoffee.Backend.genruntimeconfig.cache
 C:\Users\Acer\OneDrive\Tài liệu\Project-Coffee\ProjectCoffee.Backend\obj\Debug\net8.0\ref\ProjectCoffee.Backend.dll
+C:\Users\Acer\OneDrive\Tài liệu\Project-Coffee\ProjectCoffee.Backend\obj\Debug\net8.0\ProjectCoffee.Backend.sourcelink.json
+C:\Users\Acer\OneDrive\Tài liệu\Project-Coffee\ProjectCoffee.Backend\bin\Debug\net8.0\appsettings.Development.json

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useOrders } from '../../context/OrderContext';
 import { products as initialProducts } from '../../products';
-import { api } from '../../api';
+import { api } from '../../services';
 
 const AdminDashboard = () => {
   const { currentUser } = useAuth();

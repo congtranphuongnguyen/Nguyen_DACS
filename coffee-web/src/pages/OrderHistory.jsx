@@ -4,7 +4,7 @@ import { useOrders } from '../context/OrderContext';
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { products as currentProducts } from '../products';
-import { api } from '../api';
+import { api } from '../services';
 
 const OrderHistory = () => {
   const { currentUser } = useAuth();

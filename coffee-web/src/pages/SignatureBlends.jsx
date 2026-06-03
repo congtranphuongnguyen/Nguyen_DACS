@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useUI } from '../context/UIContext';
-import { api } from '../api';
+import { api } from '../services';
 
 const SignatureBlends = () => {
   const { addToCart } = useCart();
