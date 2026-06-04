@@ -3,7 +3,7 @@ const getApiBaseUrl = () => {
   // to prevent Mixed Content (HTTP on HTTPS) and ERR_CONNECTION_RESET (no HTTPS/SSL support on site4future)
   if (typeof window !== 'undefined' && window.location.hostname.endsWith('vercel.app')) {
     console.warn('[API] Vercel deployment detected. Routing requests via HTTPS relative proxy to prevent Mixed Content/Connection Reset.');
-    return '';
+    return '/api-proxy';
   }
 
   const url = import.meta.env.VITE_API_URL;
